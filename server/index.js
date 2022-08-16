@@ -13,7 +13,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5000/",
+    origin: "http://localhost:3000",
     methods: ["GET, POST"],
   },
 });
@@ -21,9 +21,15 @@ const io = new Server(server, {
 //socket.io listen for events
 //connection is a event in socket
 io.on("connection", (socket) => {
-  console.log(socket.id);
+  console.log(`socket io: ${socket.id}`);
 
-  io.on("disconnect", () => {
+  // socket event created
+  socket.on("join_room", (id) => {
+    socket.join(id);
+    console.log(`user: ${socket.id} ,  joined room: ${id}`);
+  });
+
+  socket.on("disconnect", () => {
     console.log("User disconnected ", socket.id);
   });
 });
