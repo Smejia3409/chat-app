@@ -23,6 +23,11 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log(`socket io: ${socket.id}`);
 
+  //send message event
+  socket.on("send_message", (data) => {
+    console.log(data);
+  });
+
   // socket event created
   socket.on("join_room", (id) => {
     socket.join(id);
