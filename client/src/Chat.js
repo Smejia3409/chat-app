@@ -24,11 +24,12 @@ function Chat({ socket, username, room }) {
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
-      console.log(data);
       //adds new messages to list
-      setMessageList((list) => [...list, data]);
+      console.log(data);
+      setMessageList([...messageList, data]);
+      setMessage("");
     });
-  }, [socket]);
+  }, [socket, messageList]);
 
   return (
     <div>
@@ -38,8 +39,15 @@ function Chat({ socket, username, room }) {
         <p>Room: {room}</p>
       </div>
       <div className="chat-body">
-        {messageList.map((message) => {
-          return <h2>{message}</h2>;
+        {messageList.map((messageContent) => {
+          return (
+            <>
+              <div>
+                <h2>{messageContent.user}</h2>
+                <h5>{messageContent.message}</h5>
+              </div>
+            </>
+          );
         })}
       </div>
       <div className="chat-footer">
