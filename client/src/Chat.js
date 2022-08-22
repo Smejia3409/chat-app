@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 
+import "./style.css";
+
 function Chat({ socket, username, room }) {
   const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+  const [messageStyle, setMessageStyle] = useState("mymessage");
 
   const sendMessage = async () => {
     if (message !== "") {
@@ -17,8 +20,11 @@ function Chat({ socket, username, room }) {
       };
 
       await socket.emit("send_message", messageData);
+      setMessageList([...messageList, messageData]);
 
       setMessage("");
+      let chat_body = document.getElementById("chat-body");
+      chat_body.scrollTop = chat_body.scrollHeight;
     }
   };
 
@@ -34,22 +40,33 @@ function Chat({ socket, username, room }) {
   return (
     <div>
       <div className="chat-header">
-        <p>live chat </p>
-        <p>Hello, {username}</p>
         <p>Room: {room}</p>
       </div>
-      <div className="chat-body">
+
+      <div className="chat-body" id="chat-body">
         {messageList.map((messageContent) => {
           return (
-            <>
-              <div>
-                <h2>{messageContent.user}</h2>
-                <h5>{messageContent.message}</h5>
+            <div className="message-container">
+              <div
+                className="message"
+                id={
+                  messageContent.user === username
+                    ? "mymessage"
+                    : "othermessage"
+                }
+              >
+                <h4>{messageContent.message}</h4>
+                <h6>
+                  <b>{messageContent.user}</b>
+                </h6>
+                <h6>{messageContent.time}</h6>
               </div>
-            </>
+            </div>
           );
         })}
       </div>
+      <br />
+
       <div className="chat-footer">
         <input
           type="text"
