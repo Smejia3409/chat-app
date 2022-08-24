@@ -12,6 +12,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const server = http.createServer(app);
+//for database connection
+const connectDb = require("./config/db");
+connectDb();
+
+//for route connection
+const userRouter = require("./routes/users");
 
 const io = new Server(server, {
   cors: {
@@ -42,6 +48,8 @@ io.on("connection", (socket) => {
 });
 
 const port = process.env.PORT || 5000;
+
+app.use("/user", userRouter);
 
 server.listen(port, () => {
   console.log("server running on port 5000");
