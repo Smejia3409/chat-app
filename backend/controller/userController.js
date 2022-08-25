@@ -55,10 +55,36 @@ const registerUser = async (req, res) => {
   }
 };
 
+const login = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    //checks database if email exists
+    const user = await User.findOne({ username });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      res.status(201).json({
+        username: username,
+        token: generateToken(user._id),
+      });
+
+      console.log("Login successfull");
+    } else {
+      res.status(400);
+      res.json("invalid user");
+      throw new Error("invalid user data");
+    }
+  } catch (error) {
+    res.status(400).json({
+      message: "Invaild credentials, please try again",
+    });
+  }
+};
+
 const generateToken = (id) => {
   return jwt.sign({ id }, "abc123", {
     expiresIn: "30d",
   });
 };
 
-module.exports = { registerUser };
+module.exports = { registerUser, login };
