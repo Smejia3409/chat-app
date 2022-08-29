@@ -1,19 +1,65 @@
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 const LoginPage = () => {
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+  });
+
+  // for redirecting
+  const navigate = useNavigate();
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    try {
+      if (credentials.username === "" || credentials.password === "") {
+        throw new Error({
+          message: "Please enter all the input fields",
+        });
+      }
+
+      let user = await axios.post(
+        "http://localhost:5000/user/login",
+        credentials
+      );
+
+      if (user) {
+        console.log("login successfull");
+        console.log(user.data);
+        navigate("/chat");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <h2>MyChats</h2>
 
       <div>
         <h4>Username</h4>
-        <input type="text" />
+        <input
+          type="text"
+          onChange={(username) =>
+            setCredentials({ ...credentials, username: username.target.value })
+          }
+        />
       </div>
 
       <div>
         <h4>Password</h4>
-        <input type="text" />
+        <input
+          type="text"
+          onChange={(password) =>
+            setCredentials({ ...credentials, password: password.target.value })
+          }
+        />
       </div>
 
-      <button>Login</button>
+      <button onClick={handleLogin}>Login</button>
       <p>
         <u>
           Don't have an account <br /> Click here to register
