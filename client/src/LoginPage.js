@@ -46,8 +46,6 @@ const LoginPage = () => {
     //if user has prevoiurly signed in it redirects you to chat room
     if (loggedin) {
       navigate("/chat");
-    } else {
-      navigate("/");
     }
   });
 
