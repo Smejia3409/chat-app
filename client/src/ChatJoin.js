@@ -1,16 +1,17 @@
 import { useState } from "react";
 import io from "socket.io-client";
 import Chat from "./Chat";
+import { getCookie } from "./cookies";
 
 const socket = io.connect("http://localhost:5000");
 
 function JoinChat() {
-  const [username, setUsername] = useState("");
+  const username = getCookie("username");
   const [room, setRoom] = useState("");
   const [displayChat, setDisplayChat] = useState(false);
 
   const joinroom = () => {
-    if (username !== "" && room !== "") {
+    if (room !== "") {
       // runs the socket io event created in the backend
       socket.emit("join_room", room);
       setDisplayChat(true);
@@ -20,11 +21,8 @@ function JoinChat() {
   return (
     <div className="App">
       <h3>Join chat room</h3>
-      <input
-        type="text"
-        placeholder="Name..."
-        onChange={(name) => setUsername(name.target.value)}
-      />
+      <h4>Welcome back, {username}</h4>
+
       <input
         type="text"
         placeholder="Room id"

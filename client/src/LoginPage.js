@@ -1,17 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { getCookie } from "./cookies";
 
 const LoginPage = () => {
+  // for redirecting
+  const navigate = useNavigate();
+
+  let loggedin = getCookie("username");
+
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
 
   const [status, setStatus] = useState("");
-
-  // for redirecting
-  const navigate = useNavigate();
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -39,6 +42,15 @@ const LoginPage = () => {
     }
   };
 
+  useEffect(() => {
+    //if user has prevoiurly signed in it redirects you to chat room
+    if (loggedin) {
+      navigate("/chat");
+    } else {
+      navigate("/");
+    }
+  });
+
   return (
     <div>
       <h2>MyChats</h2>
@@ -65,11 +77,12 @@ const LoginPage = () => {
       </div>
 
       <button onClick={handleLogin}>Login</button>
-      <p>
+      <br />
+      <Link to="/registration">
         <u>
           Don't have an account <br /> Click here to register
         </u>
-      </p>
+      </Link>
     </div>
   );
 };
