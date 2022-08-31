@@ -1,6 +1,8 @@
 import JoinChat from "./ChatJoin";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./LoginPage";
+import { useNavigate } from "react-router-dom";
+
 const App = () => {
   return (
     <BrowserRouter>

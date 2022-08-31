@@ -8,6 +8,8 @@ const LoginPage = () => {
     password: "",
   });
 
+  const [status, setStatus] = useState("");
+
   // for redirecting
   const navigate = useNavigate();
 
@@ -28,10 +30,12 @@ const LoginPage = () => {
       if (user) {
         console.log("login successfull");
         console.log(user.data);
+        document.cookie = `username=${user.data.username}`;
+        document.cookie = `token=${user.data.token}`;
         navigate("/chat");
       }
     } catch (error) {
-      console.log(error);
+      setStatus("Invalid username or password, please Try again");
     }
   };
 
@@ -40,6 +44,7 @@ const LoginPage = () => {
       <h2>MyChats</h2>
 
       <div>
+        <p>{status}</p>
         <h4>Username</h4>
         <input
           type="text"
