@@ -7,7 +7,7 @@ const chatModel = mongoose.Schema({
     unique: true,
   },
   chat: {
-    type: { Object },
+    type: {},
     require: false,
   },
 });

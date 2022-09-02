@@ -18,6 +18,7 @@ connectDb();
 
 //for route connection
 const userRouter = require("./routes/users");
+const chatRouter = require("./routes/chatRoutes");
 
 const io = new Server(server, {
   cors: {
@@ -50,6 +51,7 @@ io.on("connection", (socket) => {
 const port = process.env.PORT || 5000;
 
 app.use("/user", userRouter);
+app.use("/chat", chatRouter);
 
 server.listen(port, () => {
   console.log("server running on port 5000");
