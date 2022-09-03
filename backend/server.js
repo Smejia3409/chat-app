@@ -52,6 +52,8 @@ const port = process.env.PORT || 5000;
 
 app.use("/user", userRouter);
 app.use("/chat", chatRouter);
+//to get user with id
+app.post("/:id");
 
 server.listen(port, () => {
   console.log("server running on port 5000");

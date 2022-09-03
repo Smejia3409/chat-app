@@ -10,6 +10,9 @@ const createChatRoom = async (req, res) => {
     const checkForRoom = await Chat.findOne({ id });
 
     if (checkForRoom) {
+      res.status(400).json({
+        message: "Room has already been created",
+      });
       throw new Error("Room already exist");
     }
 
@@ -29,4 +32,39 @@ const createChatRoom = async (req, res) => {
   }
 };
 
-module.exports = { createChatRoom };
+const addMessageToRoom = async (req, res) => {
+  try {
+    const { chatBody, user } = req.body;
+
+    //object being appened to the chat array in room atribute
+    const messageBody = {
+      user: user,
+      message: chatBody,
+      time: new Date(),
+    };
+
+    const room = await Chat.findById(req.params.id);
+
+    if (!room) {
+      res.status(400).json({
+        message: "This room doesnt exit",
+      });
+      throw new Error("This room doesnt exist");
+    }
+
+    //updated the room chat log
+    const message = await Chat.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $push: { chat: messageBody } }
+    );
+    if (message) {
+      res.status(200).json({
+        message: "message sent",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { createChatRoom, addMessageToRoom };
