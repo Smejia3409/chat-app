@@ -67,4 +67,24 @@ const addMessageToRoom = async (req, res) => {
   }
 };
 
-module.exports = { createChatRoom, addMessageToRoom };
+const getMessages = async (req, res) => {
+  try {
+    //finds chat room using id
+    const room = await Chat.findById(req.params.id);
+
+    if (!room) {
+      res.status(400).json({
+        message: "This room doesnt exit",
+      });
+      throw new Error("This room doesnt exist");
+    } else {
+      res.status(200).json({
+        chat: room.chat,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { createChatRoom, addMessageToRoom, getMessages };
