@@ -40,10 +40,12 @@ const addMessageToRoom = async (req, res) => {
     const messageBody = {
       user: user,
       message: chatBody,
-      time: new Date(),
+      time: new Date().toLocaleString(),
     };
 
-    const room = await Chat.findById(req.params.id);
+    const room = await Chat.find({
+      id: req.params.id,
+    });
 
     if (!room) {
       res.status(400).json({
@@ -52,9 +54,11 @@ const addMessageToRoom = async (req, res) => {
       throw new Error("This room doesnt exist");
     }
 
+    console.log(room[0]._id);
+
     //updated the room chat log
     const message = await Chat.findByIdAndUpdate(
-      { _id: req.params.id },
+      { _id: room[0]._id },
       { $push: { chat: messageBody } }
     );
     if (message) {
@@ -70,7 +74,10 @@ const addMessageToRoom = async (req, res) => {
 const getMessages = async (req, res) => {
   try {
     //finds chat room using id
-    const room = await Chat.findById(req.params.id);
+
+    const room = await Chat.find({
+      id: req.params.id,
+    });
 
     if (!room) {
       res.status(400).json({
@@ -79,7 +86,7 @@ const getMessages = async (req, res) => {
       throw new Error("This room doesnt exist");
     } else {
       res.status(200).json({
-        chat: room.chat,
+        chat: room[0].chat,
       });
     }
   } catch (error) {
