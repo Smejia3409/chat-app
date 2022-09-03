@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import io from "socket.io-client";
 import Chat from "./Chat";
@@ -11,10 +12,22 @@ function JoinChat() {
   const [displayChat, setDisplayChat] = useState(false);
 
   const joinroom = () => {
+    let routeCall = async () => {
+      const { data: getMessages } = await axios.get(
+        `http://localhost:5000/chat/getMessages/${room}`
+      );
+
+      const { data: createRoom } = await axios.post(
+        `http://localhost:5000/chat/createChatRoom`,
+        { id: room }
+      );
+    };
+
     if (room !== "") {
       // runs the socket io event created in the backend
       socket.emit("join_room", room);
       setDisplayChat(true);
+      routeCall();
     }
   };
 
