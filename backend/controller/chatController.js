@@ -72,21 +72,21 @@ const addMessageToRoom = async (req, res) => {
 };
 
 const getRoom = async (req, res) => {
+  //request id parameter since it is a get request
   try {
     //finds chat room using id
-
+    let id = req.params.id;
     const room = await Chat.find({
-      id: req.params.id,
+      id: id,
     });
 
-    if (!room) {
-      res.status(400).json({
-        message: "This room doesnt exit",
-      });
-      throw new Error("This room doesnt exist");
-    } else {
+    if (room[0]) {
       res.status(200).json({
-        chat: room[0],
+        message: "Found",
+      });
+    } else {
+      res.status(400).json({
+        message: "Not Found",
       });
     }
   } catch (error) {

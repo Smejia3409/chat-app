@@ -13,14 +13,19 @@ function JoinChat() {
 
   const joinroom = () => {
     let routeCall = async () => {
-      const { data: getMessages } = await axios.get(
-        `http://localhost:5000/chat/getMessages/${room}`
-      );
+      try {
+        const { data: getRoom } = await axios.get(
+          `http://localhost:5000/chat/getRoom/${room.toString()}`
+        );
+        console.log(getRoom);
+      } catch (error) {
+        console.log(error);
+      }
 
-      const { data: createRoom } = await axios.post(
-        `http://localhost:5000/chat/createChatRoom`,
-        { id: room }
-      );
+      // const { data: createRoom } = await axios.post(
+      //   `http://localhost:5000/chat/createChatRoom`,
+      //   { id: room }
+      // );
     };
 
     if (room !== "") {
