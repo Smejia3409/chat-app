@@ -10,28 +10,29 @@ function JoinChat() {
   const username = getCookie("username");
   const [room, setRoom] = useState("");
   const [displayChat, setDisplayChat] = useState(false);
+  const [chatHistory, setChatHistory] = useState();
+  const [status, setStatus] = useState("");
 
   const joinroom = () => {
     let routeCall = async () => {
       try {
         const { data: getRoom } = await axios.get(
-          `http://localhost:5000/chat/getRoom/${room.toString()}`
+          `http://localhost:5000/chat/getRoom/${room}`
         );
-        console.log(getRoom);
+
+        if (getRoom) {
+          setChatHistory(getRoom);
+          setDisplayChat(true);
+        }
       } catch (error) {
         console.log(error);
+        setStatus("Room dosent exist please enter a valid room or create one");
+        setDisplayChat(false);
       }
-
-      // const { data: createRoom } = await axios.post(
-      //   `http://localhost:5000/chat/createChatRoom`,
-      //   { id: room }
-      // );
     };
 
     if (room !== "") {
-      // runs the socket io event created in the backend
       socket.emit("join_room", room);
-      setDisplayChat(true);
       routeCall();
     }
   };
@@ -48,6 +49,7 @@ function JoinChat() {
       />
 
       <button onClick={joinroom}>Join room</button>
+      <p>{status}</p>
 
       {displayChat && <Chat socket={socket} username={username} room={room} />}
     </div>

@@ -13,6 +13,7 @@ const createChatRoom = async (req, res) => {
       res.status(400).json({
         message: "Room has already been created",
       });
+
       throw new Error("Room already exist");
     }
 
@@ -83,6 +84,7 @@ const getRoom = async (req, res) => {
     if (room[0]) {
       res.status(200).json({
         message: "Found",
+        chat: room[0].chat,
       });
     } else {
       res.status(400).json({

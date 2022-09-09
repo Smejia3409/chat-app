@@ -9,7 +9,7 @@ const {
 
 const { protect } = require("../middleware/authMiddleware");
 
-router.post("/createChatRoom", createChatRoom);
+router.post("/createRoom", createChatRoom);
 router.put("/addMessage/:id", addMessageToRoom);
 router.get("/getRoom/:id", getRoom);
 
