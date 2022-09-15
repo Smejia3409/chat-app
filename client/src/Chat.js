@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import "./style.css";
 
-function Chat({ socket, username, room }) {
+function Chat({ socket, username, room, chatHistory }) {
   const [message, setMessage] = useState("");
-  const [messageList, setMessageList] = useState([]);
+  const [messageList, setMessageList] = useState(chatHistory.chat);
   const [messageStyle, setMessageStyle] = useState("mymessage");
 
   const sendMessage = async () => {
@@ -65,7 +65,6 @@ function Chat({ socket, username, room }) {
           );
         })}
       </div>
-      <br />
 
       <div className="chat-footer">
         <input

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import Chat from "./Chat";
 import { getCookie } from "./cookies";
@@ -23,6 +23,8 @@ function JoinChat() {
         if (getRoom) {
           setChatHistory(getRoom);
           setDisplayChat(true);
+          setStatus("");
+          console.log(getRoom);
         }
       } catch (error) {
         console.log(error);
@@ -30,12 +32,13 @@ function JoinChat() {
         setDisplayChat(false);
       }
     };
-
     if (room !== "") {
       socket.emit("join_room", room);
       routeCall();
     }
   };
+
+  useEffect(() => {}, [chatHistory]);
 
   return (
     <div className="App">
@@ -51,7 +54,14 @@ function JoinChat() {
       <button onClick={joinroom}>Join room</button>
       <p>{status}</p>
 
-      {displayChat && <Chat socket={socket} username={username} room={room} />}
+      {displayChat && (
+        <Chat
+          socket={socket}
+          username={username}
+          room={room}
+          chatHistory={chatHistory}
+        />
+      )}
     </div>
   );
 }

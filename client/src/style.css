@@ -13,17 +13,20 @@
 }
 
 #mymessage {
-  border: 1px solid red;
-
+  border: 1px solid #1982fc;
+  background-color: #1982fc;
+  color: white;
   width: 50%;
-  float: left;
+  float: right;
+  padding: 0;
 }
 
 #othermessage {
-  border: 1px solid blue;
-
+  border: 1px solid grey;
+  background-color: grey;
+  color: white;
   width: 50%;
-  float: right;
+  float: left;
 }
 
 .message-content {
