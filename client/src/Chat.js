@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 import "./style.css";
@@ -9,6 +10,7 @@ function Chat({ socket, username, room, chatHistory }) {
 
   const sendMessage = async () => {
     if (message !== "") {
+      console.log(room);
       const messageData = {
         room: room,
         user: username,
@@ -19,7 +21,23 @@ function Chat({ socket, username, room, chatHistory }) {
           new Date(Date.now()).getMinutes(),
       };
 
-      await socket.emit("send_message", messageData);
+      const socketData = {
+        room: room,
+        user: username,
+        message: message,
+        time:
+          new Date(Date.now()).getHours() +
+          ":" +
+          new Date(Date.now()).getMinutes(),
+      };
+
+      await axios.put(`http://localhost:5000/chat/addMessage/${room}`, {
+        username: username,
+        message: message,
+      });
+
+      await socket.emit("send_message", socketData);
+
       setMessageList([...messageList, messageData]);
 
       setMessage("");

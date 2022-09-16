@@ -35,12 +35,12 @@ const createChatRoom = async (req, res) => {
 
 const addMessageToRoom = async (req, res) => {
   try {
-    const { chatBody, user } = req.body;
+    const { message, username } = req.body;
 
     //object being appened to the chat array in room atribute
     const messageBody = {
-      user: user,
-      message: chatBody,
+      user: username,
+      message: message,
       time: new Date().toLocaleString(),
     };
 
@@ -58,11 +58,11 @@ const addMessageToRoom = async (req, res) => {
     console.log(room[0]._id);
 
     //updated the room chat log
-    const message = await Chat.findByIdAndUpdate(
+    const m = await Chat.findByIdAndUpdate(
       { _id: room[0]._id },
       { $push: { chat: messageBody } }
     );
-    if (message) {
+    if (m) {
       res.status(200).json({
         message: "message sent",
       });

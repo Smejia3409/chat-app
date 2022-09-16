@@ -13,32 +13,32 @@ function JoinChat() {
   const [chatHistory, setChatHistory] = useState();
   const [status, setStatus] = useState("");
 
-  const joinroom = () => {
-    let routeCall = async () => {
-      try {
-        const { data: getRoom } = await axios.get(
-          `http://localhost:5000/chat/getRoom/${room}`
-        );
+  let routeCall = async () => {
+    try {
+      const { data: getRoom } = await axios.get(
+        `http://localhost:5000/chat/getRoom/${room}`
+      );
 
-        if (getRoom) {
-          setChatHistory(getRoom);
-          setDisplayChat(true);
-          setStatus("");
-          console.log(getRoom);
-        }
-      } catch (error) {
-        console.log(error);
-        setStatus("Room dosent exist please enter a valid room or create one");
-        setDisplayChat(false);
+      if (getRoom) {
+        setChatHistory(getRoom);
+        setDisplayChat(true);
+        setStatus("");
+        console.log(getRoom);
       }
-    };
-    if (room !== "") {
-      socket.emit("join_room", room);
-      routeCall();
+    } catch (error) {
+      console.log(error);
+      setStatus("Room dosent exist please enter a valid room or create one");
+      setDisplayChat(false);
     }
   };
 
-  useEffect(() => {}, [chatHistory]);
+  useEffect(() => {
+    if (room !== "") {
+      socket.emit("join_room", room);
+    } else {
+      console.log("room not there");
+    }
+  }, [chatHistory]);
 
   return (
     <div className="App">
@@ -51,7 +51,7 @@ function JoinChat() {
         onChange={(room) => setRoom(room.target.value)}
       />
 
-      <button onClick={joinroom}>Join room</button>
+      <button onClick={routeCall}>Join room</button>
       <p>{status}</p>
 
       {displayChat && (
