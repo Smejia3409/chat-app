@@ -42,8 +42,13 @@ function JoinChat() {
 
   return (
     <div className="App">
-      <h3>Join chat room</h3>
-      <h4>Welcome back, {username}</h4>
+      <div className="ChatJoinHeader">
+        <div style={{ width: "90%" }}>
+          <h3>Join chat room</h3>
+          <h4>Welcome back, {username}</h4>
+        </div>
+        <CreateChat />
+      </div>
 
       <input
         type="text"
@@ -65,5 +70,39 @@ function JoinChat() {
     </div>
   );
 }
+
+const CreateChat = () => {
+  const [btnName, setBtnName] = useState("");
+  const [formDisplay, setFormDisplay] = useState("none");
+
+  const openForm = () => {
+    if (formDisplay === "none") {
+      setFormDisplay("block");
+    } else {
+      setFormDisplay("none");
+    }
+  };
+
+  const createRoom = async (event) => {
+    event.preventDefault();
+
+    try {
+    } catch (error) {}
+  };
+
+  return (
+    <div>
+      <button className="createRoom" onClick={openForm}>
+        Create room
+      </button>
+      <div className="createRoomContent" style={{ display: formDisplay }}>
+        <form>
+          <input type="text" placeholder="Enter a unique ID" />
+          <button type="submit">Create</button>
+        </form>
+      </div>
+    </div>
+  );
+};
 
 export default JoinChat;

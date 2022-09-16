@@ -12,6 +12,15 @@
   border-radius: 20px;
 }
 
+.ChatJoinHeader {
+  display: flex;
+  width: 100%;
+}
+
+.createRoom {
+  float: right;
+}
+
 #mymessage {
   border: 1px solid #1982fc;
   background-color: #1982fc;
@@ -22,8 +31,8 @@
 }
 
 #othermessage {
-  border: 1px solid grey;
-  background-color: grey;
+  border: 1px solid #d3d3d3;
+  background-color: #d3d3d3;
   color: white;
   width: 50%;
   float: left;
