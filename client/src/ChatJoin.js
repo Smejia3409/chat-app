@@ -72,13 +72,17 @@ function JoinChat() {
 }
 
 const CreateChat = () => {
-  const [btnName, setBtnName] = useState("");
+  const [btnName, setBtnName] = useState("Create Room");
   const [formDisplay, setFormDisplay] = useState("none");
+  const [roomNum, setRoomNum] = useState("");
+  const [status, setStatus] = useState("");
 
   const openForm = () => {
     if (formDisplay === "none") {
+      setBtnName("X");
       setFormDisplay("block");
     } else {
+      setBtnName("Create Room");
       setFormDisplay("none");
     }
   };
@@ -87,17 +91,37 @@ const CreateChat = () => {
     event.preventDefault();
 
     try {
-    } catch (error) {}
+      const { data: createRoom } = await axios.post(
+        `http://localhost:5000/chat/createRoom`,
+        { id: roomNum }
+      );
+
+      console.log(createRoom);
+      console.log(`The new room is: ${roomNum}`);
+      setRoomNum("");
+      setStatus("");
+    } catch (error) {
+      console.log("Room has already been created");
+      setStatus("This Id is already being used");
+    }
   };
 
   return (
     <div>
+      <p>{status}</p>
       <button className="createRoom" onClick={openForm}>
-        Create room
+        {btnName}
       </button>
       <div className="createRoomContent" style={{ display: formDisplay }}>
-        <form>
-          <input type="text" placeholder="Enter a unique ID" />
+        <form onSubmit={createRoom}>
+          <input
+            type="text"
+            placeholder="Enter a unique ID"
+            onChange={(room) => {
+              setRoomNum(room.target.value);
+            }}
+            value={roomNum}
+          />
           <button type="submit">Create</button>
         </form>
       </div>
