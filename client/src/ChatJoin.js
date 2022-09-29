@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import Chat from "./Chat";
 import { getCookie } from "./cookies";
+import { useNavigate } from "react-router-dom";
 
 const socket = io.connect("http://localhost:5000");
 
@@ -12,6 +13,8 @@ function JoinChat() {
   const [displayChat, setDisplayChat] = useState(false);
   const [chatHistory, setChatHistory] = useState();
   const [status, setStatus] = useState("");
+
+  const navigate = useNavigate();
 
   let routeCall = async () => {
     try {
@@ -33,6 +36,10 @@ function JoinChat() {
   };
 
   useEffect(() => {
+    // if (!getCookie("user")) {
+    //   navigate("/");
+    // }
+
     if (room !== "") {
       socket.emit("join_room", room);
     } else {
@@ -44,19 +51,28 @@ function JoinChat() {
     <div className="App">
       <div className="ChatJoinHeader">
         <div style={{ width: "90%" }}>
-          <h3>Join chat room</h3>
-          <h4>Welcome back, {username}</h4>
+          <h3 className="cjh-header">Join chat room</h3>
+          <h4 className="cjh-subheader">Welcome back, {username}</h4>
         </div>
-        <CreateChat />
+
+        <div>
+          <button className="logout-btn">Logout</button>
+          <CreateChat />
+        </div>
       </div>
 
+      <p className="chat-room-suggestion">Test room 1 or 2</p>
       <input
         type="text"
         placeholder="Room id"
+        className="room-input"
         onChange={(room) => setRoom(room.target.value)}
       />
+      <br />
 
-      <button onClick={routeCall}>Join room</button>
+      <button onClick={routeCall} className="joinroom-btn">
+        Join room
+      </button>
       <p>{status}</p>
 
       {displayChat && (
