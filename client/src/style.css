@@ -1,4 +1,19 @@
 * {
+  font-family: sans-serif;
+}
+
+.lp-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.lp-name {
+  font-size: 35px;
+  color: #475b5a;
 }
 
 .chat-body {
@@ -7,6 +22,10 @@
   border-radius: 10px;
   overflow-y: auto;
   padding: 40px;
+}
+
+.form-label {
+  color: #475b5a;
 }
 
 .message {
@@ -58,8 +77,8 @@
   color: #475b5a;
 }
 
-.room-input {
-  width: 40%;
+.form-input {
+  width: 100%;
   padding: 6px 10px;
   box-sizing: border-box;
   font-size: 20px;

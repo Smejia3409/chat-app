@@ -51,36 +51,48 @@ const LoginPage = () => {
 
   return (
     <div>
-      <h2>MyChats</h2>
+      <p className="lp-name">MyChats</p>
 
-      <div>
-        <p>{status}</p>
-        <h4>Username</h4>
-        <input
-          type="text"
-          onChange={(username) =>
-            setCredentials({ ...credentials, username: username.target.value })
-          }
-        />
+      <div className="lp-container">
+        <div>
+          <p>{status}</p>
+          <p className="form-label">Username</p>
+          <input
+            className="form-input"
+            type="text"
+            onChange={(username) =>
+              setCredentials({
+                ...credentials,
+                username: username.target.value,
+              })
+            }
+            placeholder="Enter username"
+          />
+        </div>
+
+        <div>
+          <p className="form-label">Password</p>
+          <input
+            className="form-input"
+            type="text"
+            onChange={(password) =>
+              setCredentials({
+                ...credentials,
+                password: password.target.value,
+              })
+            }
+            placeholder="Enter password"
+          />
+        </div>
+
+        <button onClick={handleLogin}>Login</button>
+        <br />
+        <Link to="/registration" className="">
+          <u>
+            Don't have an account <br /> Click here to register
+          </u>
+        </Link>
       </div>
-
-      <div>
-        <h4>Password</h4>
-        <input
-          type="text"
-          onChange={(password) =>
-            setCredentials({ ...credentials, password: password.target.value })
-          }
-        />
-      </div>
-
-      <button onClick={handleLogin}>Login</button>
-      <br />
-      <Link to="/registration">
-        <u>
-          Don't have an account <br /> Click here to register
-        </u>
-      </Link>
     </div>
   );
 };

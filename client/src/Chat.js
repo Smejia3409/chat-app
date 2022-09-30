@@ -57,6 +57,8 @@ function Chat({ socket, username, room, chatHistory }) {
 
   return (
     <div>
+      <button>Full</button>
+
       <div className="chat-header">
         <p>Room: {room}</p>
       </div>

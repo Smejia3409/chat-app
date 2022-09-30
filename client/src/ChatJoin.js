@@ -65,7 +65,7 @@ function JoinChat() {
       <input
         type="text"
         placeholder="Room id"
-        className="room-input"
+        className="form-input"
         onChange={(room) => setRoom(room.target.value)}
       />
       <br />
