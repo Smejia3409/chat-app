@@ -35,6 +35,17 @@ function JoinChat() {
     }
   };
 
+  const logout = () => {
+    document.cookie = `username=`;
+    document.cookie = `token=`;
+
+    navigate("/");
+  };
+
+  const inputfn = (id, fn) => {
+    let i = document.querySelectorAll(`.${id}`).forEach();
+  };
+
   useEffect(() => {
     // if (!getCookie("user")) {
     //   navigate("/");
@@ -56,7 +67,9 @@ function JoinChat() {
         </div>
 
         <div>
-          <button className="logout-btn">Logout</button>
+          <button className="logout-btn" onClick={logout}>
+            Logout
+          </button>
           <CreateChat />
         </div>
       </div>
