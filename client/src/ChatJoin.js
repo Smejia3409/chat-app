@@ -4,6 +4,7 @@ import io from "socket.io-client";
 import Chat from "./Chat";
 import { getCookie } from "./cookies";
 import { useNavigate } from "react-router-dom";
+import { onEnter } from "./fn";
 
 const socket = io.connect("http://localhost:5000");
 
@@ -74,18 +75,21 @@ function JoinChat() {
         </div>
       </div>
 
-      <p className="chat-room-suggestion">Test room 1 or 2</p>
-      <input
-        type="text"
-        placeholder="Room id"
-        className="form-input"
-        onChange={(room) => setRoom(room.target.value)}
-      />
-      <br />
+      <form onSubmit={routeCall} id="form">
+        <p className="chat-room-suggestion">Test room 1 or 2</p>
+        <input
+          type="text"
+          placeholder="Room id"
+          className="form-input"
+          onChange={(room) => setRoom(room.target.value)}
+        />
+        <br />
 
-      <button onClick={routeCall} className="joinroom-btn">
-        Join room
-      </button>
+        <button type="submit" className="joinroom-btn">
+          Join room
+        </button>
+      </form>
+
       <p>{status}</p>
 
       {displayChat && (

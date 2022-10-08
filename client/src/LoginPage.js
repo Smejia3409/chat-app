@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { getCookie } from "./cookies";
+import { onEnter } from "./fn";
 
 const LoginPage = () => {
   // for redirecting
@@ -54,38 +55,41 @@ const LoginPage = () => {
       <p className="lp-name">MyChats</p>
 
       <div className="lp-container">
-        <div>
-          <p>{status}</p>
-          <p className="form-label">Username</p>
-          <input
-            className="form-input"
-            type="text"
-            onChange={(username) =>
-              setCredentials({
-                ...credentials,
-                username: username.target.value,
-              })
-            }
-            placeholder="Enter username"
-          />
-        </div>
+        <form onSubmit={handleLogin} id="form">
+          <div>
+            <p>{status}</p>
+            <p className="form-label">Username</p>
+            <input
+              className="form-input"
+              type="text"
+              onChange={(username) =>
+                setCredentials({
+                  ...credentials,
+                  username: username.target.value,
+                })
+              }
+              placeholder="Enter username"
+            />
+          </div>
 
-        <div>
-          <p className="form-label">Password</p>
-          <input
-            className="form-input"
-            type="text"
-            onChange={(password) =>
-              setCredentials({
-                ...credentials,
-                password: password.target.value,
-              })
-            }
-            placeholder="Enter password"
-          />
-        </div>
+          <div>
+            <p className="form-label">Password</p>
+            <input
+              className="form-input"
+              type="text"
+              onChange={(password) =>
+                setCredentials({
+                  ...credentials,
+                  password: password.target.value,
+                })
+              }
+              placeholder="Enter password"
+            />
+          </div>
 
-        <button onClick={handleLogin}>Login</button>
+          <button type="submit">Login</button>
+        </form>
+
         <br />
         <Link to="/registration" className="">
           <u>
