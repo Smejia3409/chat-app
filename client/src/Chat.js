@@ -55,9 +55,19 @@ function Chat({ socket, username, room, chatHistory }) {
     });
   }, [socket, messageList]);
 
+  const [chatClass, setChatClass] = useState("chat");
+
+  const chatClassChange = () => {
+    if (chatClass === "chat") {
+      setChatClass("chat-full");
+    } else {
+      setChatClass("chat");
+    }
+  };
+
   return (
-    <div>
-      <button>Full</button>
+    <div className={chatClass}>
+      <button onClick={chatClassChange}>Full</button>
 
       <div className="chat-header">
         <p>Room: {room}</p>

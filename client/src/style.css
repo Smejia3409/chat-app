@@ -16,6 +16,17 @@
   color: #475b5a;
 }
 
+.chat {
+  height: 100%;
+  width: 100%;
+}
+
+.chat-full {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
 .chat-body {
   height: 500px;
   border: 2px solid black;

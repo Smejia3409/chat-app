@@ -17,7 +17,8 @@ function JoinChat() {
 
   const navigate = useNavigate();
 
-  let routeCall = async () => {
+  let routeCall = async (event) => {
+    event.preventDefault();
     try {
       const { data: getRoom } = await axios.get(
         `http://localhost:5000/chat/getRoom/${room}`
