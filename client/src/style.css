@@ -1,8 +1,17 @@
 * {
   font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .lp-container {
+  position: relative;
   display: flex;
   height: 100%;
   width: 100%;
@@ -17,9 +26,13 @@
 }
 
 .chat {
-  height: 100%;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
+
+/* .chat-div {
+  height: 33%;
+} */
 
 .chat-full {
   position: absolute;
@@ -28,12 +41,16 @@
 }
 
 .chat-body {
-  height: 500px;
   border: 2px solid black;
   border-radius: 10px;
-  overflow-y: auto;
-  padding: 40px;
+  overflow-y: scroll;
+  height: 100%;
 }
+
+/* .chat-footer {
+  position: relative;
+  display: flex;
+} */
 
 .form-label {
   color: #475b5a;
@@ -41,12 +58,17 @@
 
 .message {
   padding: 0%;
-  margin: 0%;
-  border-radius: 20px;
+  margin: 1%;
+  border-radius: 10px;
 }
 
 .ChatJoinHeader {
   display: flex;
+  width: 100%;
+  border: 2px solid purple;
+}
+
+.app-div {
   width: 100%;
 }
 
@@ -75,10 +97,10 @@
   border-radius: 5px;
 }
 
-.message-container {
+/* .message-container {
   position: relative;
   width: 100%;
-}
+} */
 
 .cjh-header {
   color: #475b5a;
@@ -110,4 +132,33 @@
   margin: 8px 0;
   box-sizing: border-box;
   font-size: 15px;
+}
+
+.submit-btn {
+  background-color: #475b5a;
+  color: white;
+  padding: 6px 16px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 15px;
+  border-radius: 10px;
+}
+
+.submit-btn:hover {
+  border-color: white;
+}
+
+.msg-input {
+  width: 90%;
+  padding: 6px 10px;
+  box-sizing: border-box;
+  font-size: 20px;
+}
+
+.send-btn {
+  width: 10%;
+}
+
+.chat-comp {
+  height: 70%;
 }

@@ -61,8 +61,8 @@ function JoinChat() {
   }, [chatHistory]);
 
   return (
-    <div className="App">
-      <div className="ChatJoinHeader">
+    <div className="app">
+      <div className="ChatJoinHeader app-div">
         <div style={{ width: "90%" }}>
           <h3 className="cjh-header">Join chat room</h3>
           <h4 className="cjh-subheader">Welcome back, {username}</h4>
@@ -76,31 +76,35 @@ function JoinChat() {
         </div>
       </div>
 
-      <form onSubmit={routeCall} id="form">
-        <p className="chat-room-suggestion">Test room 1 or 2</p>
-        <input
-          type="text"
-          placeholder="Room id"
-          className="form-input"
-          onChange={(room) => setRoom(room.target.value)}
-        />
-        <br />
+      <div className="app-div">
+        <form onSubmit={routeCall} id="form">
+          <p className="chat-room-suggestion">Test room 1 or 2</p>
+          <input
+            type="text"
+            placeholder="Room id"
+            className="form-input"
+            onChange={(room) => setRoom(room.target.value)}
+          />
+          <br />
 
-        <button type="submit" className="joinroom-btn">
-          Join room
-        </button>
-      </form>
+          <button type="submit" className="joinroom-btn">
+            Join room
+          </button>
+        </form>
+      </div>
 
-      <p>{status}</p>
+      <div className="app-div">
+        <p>{status}</p>
 
-      {displayChat && (
-        <Chat
-          socket={socket}
-          username={username}
-          room={room}
-          chatHistory={chatHistory}
-        />
-      )}
+        {displayChat && (
+          <Chat
+            socket={socket}
+            username={username}
+            room={room}
+            chatHistory={chatHistory}
+          />
+        )}
+      </div>
     </div>
   );
 }

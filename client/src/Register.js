@@ -57,7 +57,9 @@ const Register = () => {
           />
         </div>
 
-        <button type="submit">Create Account </button>
+        <button type="submit" className="submit-btn">
+          Create Account{" "}
+        </button>
       </form>
     </div>
   );

@@ -69,11 +69,11 @@ function Chat({ socket, username, room, chatHistory }) {
     <div className={chatClass}>
       <button onClick={chatClassChange}>Full</button>
 
-      <div className="chat-header">
+      <div className="chat-header chat-div">
         <p>Room: {room}</p>
       </div>
 
-      <div className="chat-body" id="chat-body">
+      <div className="chat-body chat-div" id="chat-body">
         {messageList.map((messageContent) => {
           return (
             <div className="message-container">
@@ -96,13 +96,16 @@ function Chat({ socket, username, room, chatHistory }) {
         })}
       </div>
 
-      <div className="chat-footer">
+      <div className="chat-footer chat-div">
         <input
           type="text"
           onChange={(m) => setMessage(m.target.value)}
           value={message}
+          className="msg-input"
         />
-        <button onClick={sendMessage}>Send Message</button>
+        <button onClick={sendMessage} className="send-btn">
+          Send Message
+        </button>
       </div>
     </div>
   );
