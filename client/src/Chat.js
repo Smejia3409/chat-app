@@ -53,27 +53,39 @@ function Chat({ socket, username, room, chatHistory }) {
       setMessageList([...messageList, data]);
       setMessage("");
     });
+
+    var element = document.getElementById("chat-body");
+    element.scrollTop = element.scrollHeight;
   }, [socket, messageList]);
 
   const [chatClass, setChatClass] = useState("chat");
+  const [chatBody, setChatBody] = useState("chat-body");
+  const [fullBtn, setFullBtn] = useState("Full Screen");
 
   const chatClassChange = () => {
     if (chatClass === "chat") {
       setChatClass("chat-full");
+      setChatBody("chat-body-full");
+      setFullBtn("Minimize");
     } else {
       setChatClass("chat");
+      setChatBody("chat-body");
+      setFullBtn("Full Screen");
+      console.log("btn clicked");
     }
   };
 
   return (
     <div className={chatClass}>
-      <button onClick={chatClassChange}>Full</button>
+      <button onClick={chatClassChange} className="full-btn">
+        {fullBtn}
+      </button>
 
       <div className="chat-header chat-div">
         <p>Room: {room}</p>
       </div>
 
-      <div className="chat-body chat-div" id="chat-body">
+      <div className={chatBody} id="chat-body">
         {messageList.map((messageContent) => {
           return (
             <div className="message-container">
