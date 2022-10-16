@@ -106,6 +106,7 @@
   color: white;
   width: 50%;
   float: left;
+  color: black;
 }
 
 .message-content {
@@ -183,4 +184,59 @@
 
 .chat-comp {
   height: 70%;
+}
+
+/* mobile css */
+
+@media only screen and (max-width: 600px) {
+  .lp-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid red;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .chat-footer {
+    display: flex;
+  }
+
+  .msg-input {
+    width: 80%;
+  }
+  .send-btn {
+    width: 20%;
+  }
+
+  .chat-body-full {
+    border: 2px solid black;
+    border-radius: 10px;
+    overflow-y: scroll;
+  }
+  .chat-body {
+    border: 2px solid black;
+    border-radius: 10px;
+    overflow-y: scroll;
+    height: 60vh;
+    bottom: 100;
+  }
+
+  .joinroom-btn {
+    display: none;
+  }
+
+  .full-btn {
+    position: relative;
+    display: block;
+  }
+
+  .chat {
+    position: relative;
+    display: block;
+  }
+  .chat-full {
+    position: relative;
+    display: block;
+  }
 }
