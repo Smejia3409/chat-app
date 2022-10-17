@@ -12,18 +12,22 @@ const Register = () => {
   const createAccount = async (event) => {
     event.preventDefault();
 
-    let user = await axios.post(
-      `http://localhost:5000/user/register`,
-      credentials
-    );
+    try {
+      let user = await axios.post(
+        `http://localhost:5000/user/register`,
+        credentials
+      );
 
-    if (user) {
-      console.log("Account creation successfull");
-      console.log(user.data);
+      if (user) {
+        console.log("Account creation successfull");
+        console.log(user.data);
 
-      document.cookie = `username=${user.data.username}`;
-      document.cookie = `token=${user.data.token}`;
-      navigate("/chat");
+        document.cookie = `username=${user.data.username}`;
+        document.cookie = `token=${user.data.token}`;
+        navigate("/chat");
+      }
+    } catch (error) {
+      alert("username already taken");
     }
   };
 
