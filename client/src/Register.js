@@ -9,6 +9,8 @@ const Register = () => {
   });
   const navigate = useNavigate();
 
+  const [status, setStatus] = useState("");
+
   const createAccount = async (event) => {
     event.preventDefault();
 
@@ -25,9 +27,10 @@ const Register = () => {
         document.cookie = `username=${user.data.username}`;
         document.cookie = `token=${user.data.token}`;
         navigate("/chat");
+        setStatus("");
       }
     } catch (error) {
-      alert("username already taken");
+      setStatus("Username already taken, Please try another one");
     }
   };
 
@@ -38,6 +41,7 @@ const Register = () => {
       </Link>
 
       <p className="rp-sub">Join the new world of discovery</p>
+      <p className="error-status">{status}</p>
       <form onSubmit={createAccount}>
         <div>
           <p className="rp-header">Username</p>
