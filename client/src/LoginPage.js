@@ -52,51 +52,52 @@ const LoginPage = () => {
 
   return (
     <div className="lp-container">
-      <p className="lp-name">MyChats</p>
+      <div className="glass-effect">
+        <p className="lp-name">MyChats</p>
+        <p></p>
 
-      <form onSubmit={handleLogin} id="form">
-        <div>
-          <p>{status}</p>
-          <p className="form-label">Username</p>
-          <input
-            className="form-input"
-            type="text"
-            onChange={(username) =>
-              setCredentials({
-                ...credentials,
-                username: username.target.value,
-              })
-            }
-            placeholder="Enter username"
-          />
-        </div>
+        <form onSubmit={handleLogin} id="form">
+          <div>
+            <p>{status}</p>
+            <p className="form-label">Username</p>
+            <input
+              className="form-input"
+              type="text"
+              onChange={(username) =>
+                setCredentials({
+                  ...credentials,
+                  username: username.target.value,
+                })
+              }
+              placeholder="Enter username"
+            />
+          </div>
 
-        <div>
-          <p className="form-label">Password</p>
-          <input
-            className="form-input"
-            type="text"
-            onChange={(password) =>
-              setCredentials({
-                ...credentials,
-                password: password.target.value,
-              })
-            }
-            placeholder="Enter password"
-          />
-        </div>
+          <div>
+            <p className="form-label">Password</p>
+            <input
+              className="form-input"
+              type="text"
+              onChange={(password) =>
+                setCredentials({
+                  ...credentials,
+                  password: password.target.value,
+                })
+              }
+              placeholder="Enter password"
+            />
+          </div>
 
-        <button type="submit" className="submit-btn">
-          Login
-        </button>
-      </form>
+          <button type="submit" className="submit-btn">
+            Login
+          </button>
+        </form>
 
-      <br />
-      <Link to="/registration" className="">
-        <u>
+        <br />
+        <Link to="/registration" className="link">
           Don't have an account <br /> Click here to register
-        </u>
-      </Link>
+        </Link>
+      </div>
     </div>
   );
 };

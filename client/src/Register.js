@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
@@ -28,12 +28,17 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <h3>Account Registration</h3>
+    <div className="registration-page">
+      <Link to="/" className="rp-link link">
+        ...Login page
+      </Link>
+
+      <p className="rp-sub">Join the new world of discovery</p>
       <form onSubmit={createAccount}>
         <div>
-          <h4>Username</h4>
+          <p className="rp-header">Username</p>
           <input
+            className="form-input"
             type="text"
             onChange={(username) => {
               setCredentials({
@@ -41,12 +46,14 @@ const Register = () => {
                 username: username.target.value,
               });
             }}
+            placeholder="Enter username..."
           />
         </div>
 
         <div>
-          <h4>Password</h4>
+          <p className="rp-header">Password</p>
           <input
+            className="form-input"
             type="text"
             onChange={(password) => {
               setCredentials({
@@ -54,6 +61,7 @@ const Register = () => {
                 password: password.target.value,
               });
             }}
+            placeholder="Enter Password..."
           />
         </div>
 
