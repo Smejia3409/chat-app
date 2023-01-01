@@ -1,3 +1,15 @@
+# Chat app
+
+## MERN stack chat app with user login auth using JWT
+
+### Login Page
+
+![alt text](client/public/chat_app_login.png)
+
+### Home page
+
+![alt text](client/public/chat_app_home.png)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
